@@ -1,0 +1,12 @@
+@import url(./fonts/normalize.css);
+@import url(./fonts/fonts.css);
+@import url(./blocks/general.css);
+@import url(./blocks/page.css);
+@import url(./blocks/header.css);
+@import url(./blocks/profile.css);
+@import url(./blocks/elements.css);
+@import url(./blocks/footer.css);
+@import url(./blocks/popup.css);
+@import url(./blocks/image-popup.css);
+@import url(./blocks/register.css);
+@import url(./blocks/login.css);

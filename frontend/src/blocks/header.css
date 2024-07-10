@@ -1,0 +1,29 @@
+.header {
+  max-width: 880px;
+  margin: 0 auto;
+  height: 74px;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 22px;
+  padding-top: 45px;
+  border-bottom: thin solid #545454;
+}
+
+.header__menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__menu-item {
+  margin-left: 23px;
+  color: white;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 940px) {
+  .header {
+    max-width: 90%;
+  }
+}
