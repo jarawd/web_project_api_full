@@ -4,6 +4,7 @@
   "description": "web_project_around_express",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "dev": "nodemon app.js",
     "lint": "npx eslint ."
   },
