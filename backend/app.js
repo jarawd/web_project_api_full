@@ -69,7 +69,7 @@ app.use(errors());
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
   res.status(statusCode).send({
-    message: statusCode === 500 ? "Erro del servidor!" : message,
+    message: statusCode === 500 ? "Error del servidor!" : message,
   });
 });
 
