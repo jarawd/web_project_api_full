@@ -8,7 +8,7 @@ class Api {
 
   setProfileInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "GET",
+      method: 'GET',
       headers: {
         authorization: this._token,
       },
@@ -17,7 +17,7 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      method: "GET",
+      method: 'GET',
       headers: {
         authorization: this._token,
       },
@@ -26,10 +26,10 @@ class Api {
 
   getCard(obj) {
     return fetch(`${this._baseUrl}/cards`, {
-      method: "POST",
+      method: 'POST',
       headers: {
         authorization: this._token,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: obj.name,
@@ -40,10 +40,10 @@ class Api {
 
   getAvatar(url) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
         authorization: this._token,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         avatar: url.avatar,
@@ -53,12 +53,12 @@ class Api {
 
   getLikes(obj) {
     return fetch(
-      `https://around.nomoreparties.co/v1/${this._groupId}/cards/likes/${obj._id}`,
+      `https://flux.crabdance.com/${this._groupId}/cards/likes/${obj._id}`,
       {
-        method: "PUT",
+        method: 'PUT',
         headers: {
           authorization: this._token,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           likes:
@@ -84,12 +84,12 @@ class Api {
 
   getDislikes(obj) {
     return fetch(
-      `https://around.nomoreparties.co/v1/${this._groupId}/cards/likes/${obj._id}`,
+      `https://flux.crabdance.com/${this._groupId}/cards/likes/${obj._id}`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
           authorization: this._token,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -97,12 +97,12 @@ class Api {
 
   deleteCard(obj) {
     return fetch(
-      `https://around.nomoreparties.co/v1/${this._groupId}/cards/${obj._id}`,
+      `https://flux.crabdance.com/${this._groupId}/cards/${obj._id}`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
           authorization: this._token,
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -110,10 +110,10 @@ class Api {
 
   setUser(user) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
         authorization: this._token,
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         name: user.name,
@@ -124,7 +124,7 @@ class Api {
 }
 
 const api = new Api({
-  address: `https://around.nomoreparties.co/v1/`,
+  address: `https://flux.crabdance.com`,
   groupId: `web_es_12`,
   token: `e42f8e22-9ca0-486e-b216-ea9a771afa3a`,
 });

@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://register.nomoreparties.co';
+export const BASE_URL = 'https://flux.crabdance.com';
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
