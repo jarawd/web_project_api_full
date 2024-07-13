@@ -3,7 +3,7 @@ class Api {
     this._address = address;
     this._groupId = groupId;
     this._token = token;
-    this._baseUrl = `${this._address}${this._groupId}`;
+    this._baseUrl = `${this._address}/${this._groupId}`;
   }
 
   setProfileInfo() {
