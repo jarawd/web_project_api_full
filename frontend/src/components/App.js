@@ -157,7 +157,7 @@ function App() {
         return Promise.reject(`Error: ${res.status}`);
       })
       .then((data) => setCurrentUser(data))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message));
   }, []);
 
   const contextValues = {
