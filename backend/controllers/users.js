@@ -9,6 +9,7 @@ module.exports.getUsers = (req, res) => {
       error.statusCode = 404;
       throw error;
     })
+    .then((data) => data.json())
     .then((users) => res.send({ data: users }))
     .catch((err) => res.status(500).send({ error: err.message }));
 };
@@ -36,6 +37,7 @@ module.exports.createUser = (req, res) => {
       error.statusCode = 400;
       throw error;
     })
+    .then((data) => data.json())
     .then((newUser) => res.send({ data: newUser }))
     .catch((err) => res.status(500).send({ error: err.message }));
 };
