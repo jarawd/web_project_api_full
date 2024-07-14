@@ -3,7 +3,7 @@ class Api {
     this._address = address;
     this._groupId = groupId;
     this._token = token;
-    this._baseUrl = `${this._address}/${this._groupId}`;
+    this._baseUrl = `${this._address}`;
   }
 
   setProfileInfo() {
@@ -52,60 +52,51 @@ class Api {
   }
 
   getLikes(obj) {
-    return fetch(
-      `https://flux.crabdance.com/${this._groupId}/cards/likes/${obj._id}`,
-      {
-        method: 'PUT',
-        headers: {
-          authorization: this._token,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          likes:
-            obj.likes > 0
-              ? obj.likes.push({
-                  about: obj.owner.about,
-                  avatar: obj.owner.avatar,
-                  cohort: obj.owner.cohort,
-                  name: obj.owner.name,
-                  _id: obj.owner._id,
-                })
-              : {
-                  about: obj.owner.about,
-                  avatar: obj.owner.avatar,
-                  cohort: obj.owner.cohort,
-                  name: obj.owner.name,
-                  _id: obj.owner._id,
-                },
-        }),
-      }
-    );
+    return fetch(`https://flux.crabdance.com/cards/likes/${obj._id}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        likes:
+          obj.likes > 0
+            ? obj.likes.push({
+                about: obj.owner.about,
+                avatar: obj.owner.avatar,
+                cohort: obj.owner.cohort,
+                name: obj.owner.name,
+                _id: obj.owner._id,
+              })
+            : {
+                about: obj.owner.about,
+                avatar: obj.owner.avatar,
+                cohort: obj.owner.cohort,
+                name: obj.owner.name,
+                _id: obj.owner._id,
+              },
+      }),
+    });
   }
 
   getDislikes(obj) {
-    return fetch(
-      `https://flux.crabdance.com/${this._groupId}/cards/likes/${obj._id}`,
-      {
-        method: 'DELETE',
-        headers: {
-          authorization: this._token,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return fetch(`https://flux.crabdance.com/cards/likes/${obj._id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   deleteCard(obj) {
-    return fetch(
-      `https://flux.crabdance.com/${this._groupId}/cards/${obj._id}`,
-      {
-        method: 'DELETE',
-        headers: {
-          authorization: this._token,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    return fetch(`https://flux.crabdance.com/cards/${obj._id}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   setUser(user) {
@@ -125,7 +116,6 @@ class Api {
 
 const api = new Api({
   address: `https://flux.crabdance.com`,
-  groupId: `web_es_12`,
   token: `e42f8e22-9ca0-486e-b216-ea9a771afa3a`,
 });
 
