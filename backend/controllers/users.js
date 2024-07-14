@@ -4,25 +4,21 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res) => {
   User.find({})
-    .orFail(() => {
-      const error = new Error("Users not found");
-      error.statusCode = 404;
-      throw error;
-    })
-    .then((data) => data.json())
     .then((users) => res.send({ data: users }))
     .catch((err) => res.status(500).send({ error: err.message }));
 };
 
 module.exports.getUserById = (req, res) => {
   User.findById(req.params.id)
-    .orFail(() => {
-      const error = new Error("Invalid request");
-      res.statusCode = 400;
-      throw error;
+    .then((user) => {
+      if (!user) {
+        const error = new Error("User not found");
+        error.statusCode = 404;
+        throw error;
+      }
+      res.json(user);
     })
-    .then((user) => res.json(user))
-    .catch((err) => res.status(500).send({ error: err.message }));
+    .catch((err) => res.status(400).send({ error: err.message }));
 };
 
 module.exports.getCurrentUser = (req, res) => {
@@ -32,14 +28,8 @@ module.exports.getCurrentUser = (req, res) => {
 module.exports.createUser = (req, res) => {
   const { email, password } = req.body;
   User.create({ email, password })
-    .orFail(() => {
-      const error = new Error("Invalid request");
-      error.statusCode = 400;
-      throw error;
-    })
-    .then((data) => data.json())
-    .then((newUser) => res.send({ data: newUser }))
-    .catch((err) => res.status(500).send({ error: err.message }));
+    .then((newUser) => res.status(201).send({ data: newUser }))
+    .catch((err) => res.status(400).send({ error: err.message }));
 };
 
 module.exports.updateProfile = (req, res) => {
@@ -50,15 +40,15 @@ module.exports.updateProfile = (req, res) => {
     runValidators: true,
     upsert: true,
   })
-    .orFail(() => {
-      const error = new Error("It is not possible to update the Profile");
-      error.statusCode = 400;
-      throw error;
-    })
     .then((user) => {
+      if (!user) {
+        const error = new Error("User not found");
+        error.statusCode = 404;
+        throw error;
+      }
       res.status(200).json(user);
     })
-    .catch((err) => res.status(500).send({ error: err.message }));
+    .catch((err) => res.status(400).send({ error: err.message }));
 };
 
 module.exports.updateAvatar = (req, res) => {
@@ -69,13 +59,15 @@ module.exports.updateAvatar = (req, res) => {
     runValidators: true,
     upsert: true,
   })
-    .orFail(() => {
-      const error = new Error("It is not possible to update the Avatar");
-      error.statusCode = 400;
-      throw error;
+    .then((avatar) => {
+      if (!avatar) {
+        const error = new Error("Avatar not found");
+        error.statusCode = 404;
+        throw error;
+      }
+      res.status(200).json(avatar);
     })
-    .then((avatar) => res.status(200).json(avatar))
-    .catch((err) => res.status(500).json({ error: err.message }));
+    .catch((err) => res.status(400).send({ error: err.message }));
 };
 
 module.exports.login = (req, res) => {
