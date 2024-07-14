@@ -1,21 +1,23 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const app = express();
 const path = require("path");
+const { celebrate, Joi, errors } = require("celebrate");
+const validator = require("validator");
+const { errorLogger, requestLogger } = require("./middlewares/logger");
 const usersRoute = require("./routes/users");
 const cardsRoute = require("./routes/cards");
 const { login, createUser } = require("./controllers/users");
 const auth = require("./middlewares/auth");
-const { celebrate, Joi, errors } = require("celebrate");
-const validator = require("validator");
-const { errorLogger, requestLogger } = require("./middlewares/logger");
 
-app.use(express.static(path.join(__dirname, "/")));
 require("dotenv").config();
+
 const { PORT = 3000, NODE_ENV, JWT_SECRET } = process.env;
+const app = express();
 
 mongoose.connect("mongodb://127.0.0.1:27017/aroundb");
+
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.use(requestLogger);
 
@@ -29,6 +31,7 @@ app.post(
   }),
   login
 );
+
 app.post(
   "/signup",
   celebrate({
@@ -39,9 +42,8 @@ app.post(
   }),
   createUser
 );
-app.get("", (req, res) => {
-  res.status(404).send({ message: "Recurso solicitado no encontrado" });
-});
+
+app.use(auth);
 
 const validateURL = (value, helpers) => {
   if (validator.isURL(value)) {
@@ -50,7 +52,8 @@ const validateURL = (value, helpers) => {
   return helpers.error("string.uri");
 };
 
-app.use(auth);
+app.use("/", usersRoute);
+
 app.use(
   "/",
   celebrate({
@@ -60,7 +63,6 @@ app.use(
   }),
   cardsRoute
 );
-app.use("/", usersRoute);
 
 app.use(errorLogger);
 
@@ -71,6 +73,10 @@ app.use((err, req, res, next) => {
   res.status(statusCode).send({
     message: statusCode === 500 ? "Error del servidor!" : message,
   });
+});
+
+app.use((req, res, next) => {
+  res.status(404).send({ message: "Recurso solicitado no encontrado" });
 });
 
 app.listen(PORT, () => {

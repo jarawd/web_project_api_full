@@ -29,8 +29,8 @@ module.exports.getCurrentUser = (req, res) => {
 };
 
 module.exports.createUser = (req, res) => {
-  const { name, about, avatar, email, password } = req.body;
-  User.create({ name, about, avatar })
+  const { email, password } = req.body;
+  User.create({ email, password })
     .orFail(() => {
       const error = new Error("Invalid request");
       error.statusCode = 400;
