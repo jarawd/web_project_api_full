@@ -28,7 +28,7 @@ module.exports.getCurrentUser = (req, res) => {
 module.exports.createUser = (req, res) => {
   const { email, password } = req.body;
   User.create({ email, password })
-    .then((newUser) => res.status(201).send({ data: newUser }))
+    .then((newUser) => res.status(201).json({ data: newUser }))
     .catch((err) => res.status(400).send({ error: err.message }));
 };
 

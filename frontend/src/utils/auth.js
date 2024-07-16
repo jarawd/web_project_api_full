@@ -14,7 +14,7 @@ export const register = (email, password) => {
       }
       return Promise.reject(`Error: ${data.status}`);
     })
-    .catch((err) => console.error('Error:', err));
+    .catch((err) => console.error('Error:', err.message));
 };
 
 export const authorize = (email, password) => {
