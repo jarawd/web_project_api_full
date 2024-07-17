@@ -8,11 +8,13 @@ const usersRoute = require("./routes/users");
 const cardsRoute = require("./routes/cards");
 const { login, createUser } = require("./controllers/users");
 const auth = require("./middlewares/auth");
+const cors = require("cors");
 
 require("dotenv").config();
 
 const { PORT = 3000, NODE_ENV, JWT_SECRET } = process.env;
 const app = express();
+app.use(cors());
 
 mongoose.connect("mongodb://127.0.0.1:27017/aroundb");
 
