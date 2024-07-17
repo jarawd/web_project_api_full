@@ -145,7 +145,7 @@ function App() {
       .then((data) => {
         setCards(data);
       });
-  }, [cards]);
+  }, []);
 
   useEffect(() => {
     api
