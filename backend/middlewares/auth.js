@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-  const authorization = req.headers;
+  const {authorization} = req.headers;
   if (!authorization || !authorization.startsWith("Bearer ")) {
     return res.status(401).send({ message: "Authorization required" });
   }
@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 
   let payload;
   try {
-    payload = jwt.verify(token, "some-secret-key");
+    payload = jwt.verify(token, "dev-secret");
   } catch {
     return res.status(401).send("Authorization required");
   }

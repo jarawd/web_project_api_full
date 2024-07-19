@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res) => {
@@ -22,14 +23,19 @@ module.exports.getUserById = (req, res) => {
 };
 
 module.exports.getCurrentUser = (req, res) => {
-  res.json(req.user);
+  User.findById(req.user._id).then(user => {
+    res.json(user);
+  })  
 };
 
 module.exports.createUser = (req, res) => {
   const { email, password } = req.body;
-  User.create({ email, password })
-    .then((newUser) => res.status(201).json({ data: newUser }))
-    .catch((err) => res.status(400).send({ error: err.message }));
+
+  bcrypt.hash(password, 10).then((hash) => {
+    User.create({ email, password: hash })
+      .then((newUser) => res.status(201).json({ data: newUser }))
+      .catch((err) => res.status(400).send({ error: err.message }));
+  });
 };
 
 module.exports.updateProfile = (req, res) => {
@@ -73,9 +79,9 @@ module.exports.updateAvatar = (req, res) => {
 module.exports.login = (req, res) => {
   const { email, password } = req.body;
   User.findUserByCredentials(email, password)
-    .then((user) => {
+    .then((user) => {      
       const token = jwt.sign(
-        { _id: user._id },
+        { _id: user._id , test: 'hooa'},
         NODE_ENV === "production" ? JWT_SECRET : "dev-secret",
         {
           expiresIn: "7d",

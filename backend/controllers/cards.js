@@ -1,12 +1,9 @@
 const Card = require("../models/card");
 
 module.exports.getCards = (req, res) => {
-  Card.find({})
-    .orFail(() => {
-      const error = new Error("Cards not found");
-      res.status(404);
-      throw error;
-    })
+  res.send([])
+  return;
+  Card.find({})    
     .then((cards) => res.status(200).send({ data: cards }))
     .catch((err) => res.status(500).send({ message: err.message }));
 };

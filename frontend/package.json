@@ -43,8 +43,7 @@
   "devDependencies": {
     "gh-pages": "^6.1.1",
     "nodemon": "^3.1.4"
-  },
-  "homepage": "https://jarawd.github.io/web_project_around_react",
+  }, 
   "description": "Nombre del proyecto:\r Tripleten web_project_around",
   "main": "index.js",
   "keywords": [],

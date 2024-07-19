@@ -11,6 +11,7 @@ export default function Login({ handleLogin }) {
     setIsRegisterPopupOpen,
     setStateRegister,
     setToken,
+    tokenCheck,
   } = useContext(CurrentUserContext);
   const navigate = useNavigate();
 
@@ -31,6 +32,7 @@ export default function Login({ handleLogin }) {
         setLoggedIn(true);
         navigate('/');
         setToken(localStorage.setItem('jwt', res.token));
+        tokenCheck(res.token)
       } else {
         setStateRegister(false);
         setIsRegisterPopupOpen(true);
