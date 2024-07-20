@@ -6,7 +6,7 @@ class Api {
     this._baseUrl = `${this._address}`;
   }
 
-  setToken(token){
+  setToken(token) {
     this._token = 'Bearer ' + token;
   }
 
@@ -56,7 +56,7 @@ class Api {
   }
 
   getLikes(obj) {
-    return fetch(`${this._baseUrl}cards/likes/${obj._id}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${obj._id}`, {
       method: 'PUT',
       headers: {
         authorization: this._token,
@@ -84,7 +84,7 @@ class Api {
   }
 
   getDislikes(obj) {
-    return fetch(`${this._baseUrl}cards/likes/${obj._id}`, {
+    return fetch(`${this._baseUrl}/cards/likes/${obj._id}`, {
       method: 'DELETE',
       headers: {
         authorization: this._token,
@@ -94,7 +94,7 @@ class Api {
   }
 
   deleteCard(obj) {
-    return fetch(`${this._baseUrl}cards/${obj._id}`, {
+    return fetch(`${this._baseUrl}/cards/${obj._id}`, {
       method: 'DELETE',
       headers: {
         authorization: this._token,
@@ -119,7 +119,7 @@ class Api {
 }
 
 const api = new Api({
-  address: `http://localhost:3000`,
+  address: `https://flux.crabdance.com`,
   token: `e42f8e22-9ca0-486e-b216-ea9a771afa3a`,
 });
 
