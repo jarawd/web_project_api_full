@@ -26,7 +26,7 @@ module.exports.likeCard = (req, res) => {
     req.params.cardId,
     { $addToSet: { likes: req.user._id } },
     { new: true }
-  ).then((card) => res.send(card));
+  ).populate(['owner', 'likes']).then((card) => res.send(card));
 };
 
 module.exports.dislikeCard = (req, res) => {

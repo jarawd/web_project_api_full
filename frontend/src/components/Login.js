@@ -22,7 +22,7 @@ export default function Login({ handleLogin }) {
     if (menu.length === 0 || menu[0].route !== '/signup') {
       setMenu([{ route: '/signup', title: 'Regístrate' }]);
     }
-  }, [menu, setMenu]);
+  }, [menu]);
 
   function handleSubmit(e) {
     e.preventDefault();

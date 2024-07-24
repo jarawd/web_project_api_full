@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Header() {
-  const { menu } = useContext(CurrentUserContext);
+  const { menu } = useContext(CurrentUserContext);  
+
+  const handleLogout = (e) => {
+    if(menu.length > 1){
+      localStorage.clear();
+    }
+  }
+
   return (
     <header className="header">
       <img
@@ -18,6 +25,7 @@ function Header() {
               key={i}
               className="header__menu-item"
               to={el.route}
+              onClick={handleLogout}
             >
               {el.title}
             </Link>

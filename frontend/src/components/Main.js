@@ -13,7 +13,7 @@ function Main(props) {
         { route: '/signin', title: 'Cerrar Sesión' },
       ]);
     }
-  }, [loggedIn, setMenu]);
+  }, [loggedIn]);
 
   return (
     <>

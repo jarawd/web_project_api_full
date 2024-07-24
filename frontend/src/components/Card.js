@@ -22,7 +22,7 @@ export default function Card(props) {
         })
         .then((data) => {
           setLikesQty(data.likes.length);
-          setIsLiked(true);
+          setIsLiked(data.likes.some(like => like => user._id));
         })
         .catch((err) => {
           console.log(err);
