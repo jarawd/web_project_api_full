@@ -119,7 +119,7 @@ class Api {
 }
 
 const api = new Api({
-  address: `https://flux.crabdance.com`,
+  address: `https://api.flux.crabdance.com`,
   token: `e42f8e22-9ca0-486e-b216-ea9a771afa3a`,
 });
 

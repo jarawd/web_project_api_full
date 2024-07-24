@@ -1,18 +1,18 @@
-import Footer from "./Footer";
-import Header from "./Header";
-import Register from "./Register";
-import PopupRegister from "./PopupRegister";
-import Main from "./Main";
-import Login from "./Login";
-import React, { useState, useEffect } from "react";
-import ImagePopup from "./ImagePopup";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import api from "../utils/api";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import * as auth from "../utils/auth";
+import Footer from './Footer';
+import Header from './Header';
+import Register from './Register';
+import PopupRegister from './PopupRegister';
+import Main from './Main';
+import Login from './Login';
+import React, { useState, useEffect } from 'react';
+import ImagePopup from './ImagePopup';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import api from '../utils/api';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import * as auth from '../utils/auth';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -21,14 +21,14 @@ function App() {
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState("");
+  const [currentUser, setCurrentUser] = useState('');
   const [cards, setCards] = useState([]);
-  const [menu, setMenu] = useState([""]);
+  const [menu, setMenu] = useState(['']);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [stateRegister, setStateRegister] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [token, setToken] = useState("");
-  const navigate = useNavigate("");
+  const [stateRegister, setStateRegister] = useState('');
+  const [userEmail, setUserEmail] = useState('');
+  const [token, setToken] = useState('');
+  const navigate = useNavigate('');
 
   function handleCardDelete(card) {
     api
@@ -126,17 +126,17 @@ function App() {
     auth.getUser(token).then((res) => {
       if (res) {
         setLoggedIn(true);
-        navigate("/");
+        navigate('/');
         setUserEmail(res.email);
         api.setToken(token);
         setCurrentUser(res);
-        getCards();      
+        getCards();
       }
     });
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
+    const token = localStorage.getItem('jwt');
     if (token) {
       tokenCheck(token);
     }
@@ -162,6 +162,7 @@ function App() {
     userEmail,
     setUserEmail,
     setToken,
+    tokenCheck,
   };
 
   return (
@@ -190,7 +191,7 @@ function App() {
               ) : (
                 <Route
                   path="/*"
-                  element={<Login handleLogin={auth.authorize} tokenCheck={tokenCheck}  />}
+                  element={<Login handleLogin={auth.authorize} />}
                 ></Route>
               )}
               <Route

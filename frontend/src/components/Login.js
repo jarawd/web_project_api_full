@@ -31,8 +31,9 @@ export default function Login({ handleLogin }) {
       if (res) {
         setLoggedIn(true);
         navigate('/');
-        setToken(localStorage.setItem('jwt', res.token));
-        tokenCheck(res.token)
+        localStorage.setItem('jwt', res.token);
+        setToken(res.token);
+        tokenCheck(res.token);
       } else {
         setStateRegister(false);
         setIsRegisterPopupOpen(true);
