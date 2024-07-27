@@ -37,10 +37,10 @@ function App() {
         if (res.ok) {
           return res.json();
         }
-        return Promise.reject(`Error: ${res.status}`);
+        return Promise.reject(`Error: ${res.message}`);
       })
       .then((data) => {
-        setCards(data);
+        getCards();
       })
       .catch((err) => {
         console.log(err);
@@ -116,7 +116,7 @@ function App() {
         return Promise.reject(`Error: ${res}`);
       })
       .then((data) => {
-        setCards({ obj, ...cards });
+        setCards([data, ...cards]);
         closeAllPopups();
       })
       .catch((err) => console.log(err));

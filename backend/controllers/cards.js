@@ -10,6 +10,7 @@ module.exports.getCards = (req, res) => {
 module.exports.createCard = (req, res) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
+    .then(({ _id }) => Card.findById(_id).populate(["owner", "likes"]))
     .then((card) => res.status(200).send(card))
     .catch((err) => res.status(500).send({ message: err.message }));
 };
@@ -26,7 +27,9 @@ module.exports.likeCard = (req, res) => {
     req.params.cardId,
     { $addToSet: { likes: req.user._id } },
     { new: true }
-  ).populate(['owner', 'likes']).then((card) => res.send(card));
+  )
+    .populate(["owner", "likes"])
+    .then((card) => res.send(card));
 };
 
 module.exports.dislikeCard = (req, res) => {
